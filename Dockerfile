@@ -18,7 +18,7 @@ RUN yum install -y redhat-rpm-config \
     yum clean all
 
 RUN pip install --upgrade pip
-RUN pip install zapcli
+RUN pip install -I zapcli
 # Install latest dev version of the python API
 RUN pip install python-owasp-zap-v2.4
 
