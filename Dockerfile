@@ -2,6 +2,8 @@
 FROM centos:centos7
 MAINTAINER Deven Phillips <deven.phillips@redhat.com>
 
+USER 0
+
 RUN yum install -y epel-release && \
     yum clean all
 RUN yum install -y redhat-rpm-config \
@@ -51,6 +53,7 @@ RUN chown root:root /zap -R && \
     chown root:root -R /var/lib/jenkins && \
     chmod 777 /var/lib/jenkins -R && \
     chmod 777 /zap -R
+USER 1001
 
 WORKDIR /var/lib/jenkins
 
