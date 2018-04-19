@@ -44,13 +44,13 @@ COPY .xinitrc /var/lib/jenkins/
 
 WORKDIR /zap
 # Download and expand the latest stable release 
-RUN curl -s https://raw.githubusercontent.com/zaproxy/zap-admin/master/ZapVersions-dev.xml | xmlstarlet sel -t -v //url |grep -i Linux | wget -q --content-disposition -i - -O - | tar zx --strip-components=1 && \
-    curl -s -L https://bitbucket.org/meszarv/webswing/downloads/webswing-2.3-distribution.zip | jar -x && \
+RUN curl -sk https://raw.githubusercontent.com/zaproxy/zap-admin/master/ZapVersions-dev.xml | xmlstarlet sel -t -v //url |grep -i Linux | wget -q --content-disposition -i - -O - | tar zx --strip-components=1 && \
+    curl -sk -L https://bitbucket.org/meszarv/webswing/downloads/webswing-2.3-distribution.zip | jar -x && \
     touch AcceptedLicense
 ADD webswing.config /zap/webswing-2.3/webswing.config
 
-RUN chown root:root /zap -R && \
-    chown root:root -R /var/lib/jenkins && \
+RUN chown 0:0 /zap -R && \
+    chown 0:0 -R /var/lib/jenkins && \
     chmod 777 /var/lib/jenkins -R && \
     chmod 777 /zap -R
 USER 1001
